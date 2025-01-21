@@ -6,7 +6,7 @@ export default function Home() {
   const [count, setCount] = useState(0);
   return (
     <div>
-      <script type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/1944242a637/bf42472sot/c710c1a0a26295c5_complete.js" crossOrigin="anonymous"></script>
+      <script async type="text/javascript" src="https://js-cdn.dynatrace.com/jstag/1944242a637/bf42472sot/c710c1a0a26295c5_complete.js" crossOrigin="anonymous"></script>
       <div>counter: {count}</div>
       <button
         onClick={() => setCount((prev) => prev + 1)}
