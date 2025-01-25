@@ -2,8 +2,14 @@
 
 import { useState } from "react";
 
+function isRealNumber(value: any): value is number {
+  return (
+    typeof value === "number" && !Number.isNaN(value) && Number.isFinite(value)
+  );
+}
+
 export default function Home() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState<number | string>(0);
   return (
     <div>
       <script
@@ -14,7 +20,9 @@ export default function Home() {
       ></script>
       <div>counter: {count}</div>
       <button
-        onClick={() => setCount((prev) => prev + 1)}
+        onClick={() =>
+          setCount((prev) => (isRealNumber(prev) && prev + 1) || prev)
+        }
         style={{ border: "1px solid green", padding: "5px" }}
       >
         increase counter (FE-local)
@@ -23,14 +31,18 @@ export default function Home() {
       <button
         onClick={() =>
           fetch("/api/sum")
-            .then((res) => res.json())
+            .then((res) => {
+              if (res.ok) return res.json();
+              throw new Error(`Network response at ${new Date()} was not ok`);
+            })
             .then((data) => setCount(data.sum))
+            .catch((error) => setCount(error.message))
         }
         style={{ border: "1px solid blue", padding: "5px" }}
       >
-       random number<sup>*</sup>
+        random number<sup>*</sup>
       </button>
-      <br/>
+      <br />
       <button
         style={{ border: "1px solid red", padding: "5px" }}
         onClick={() => {
@@ -39,7 +51,10 @@ export default function Home() {
       >
         throw an error
       </button>
-      <div><sup>*</sup> fetches a random number from /api/sum which in turn fetches 2 random numbers in parallel from /api/random, sums them up and returns</div>
+      <div>
+        <sup>*</sup> fetches a random number from /api/sum which in turn fetches
+        2 random numbers in parallel from /api/random, sums them up and returns
+      </div>
     </div>
   );
 }
