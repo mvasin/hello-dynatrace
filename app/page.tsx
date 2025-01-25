@@ -9,7 +9,7 @@ function isRealNumber(value: any): value is number {
 }
 
 export default function Home() {
-  const [count, setCount] = useState<number | string>(0);
+  const [display, setDisplay] = useState<number | string>(0);
   return (
     <div>
       <script
@@ -18,10 +18,10 @@ export default function Home() {
         src="https://js-cdn.dynatrace.com/jstag/1944242a637/bf42472sot/c710c1a0a26295c5_complete.js"
         crossOrigin="anonymous"
       ></script>
-      <div>counter: {count}</div>
+      <div>counter: {display}</div>
       <button
         onClick={() =>
-          setCount((prev) => (isRealNumber(prev) && prev + 1) || prev)
+          setDisplay((prev) => (isRealNumber(prev) && prev + 1) || prev)
         }
         style={{ border: "1px solid green", padding: "5px" }}
       >
@@ -35,8 +35,8 @@ export default function Home() {
               if (res.ok) return res.json();
               throw new Error(`Network response at ${new Date()} was not ok`);
             })
-            .then((data) => setCount(data.sum))
-            .catch((error) => setCount(error.message))
+            .then((data) => setDisplay(data.sum))
+            .catch((error) => setDisplay(error.message))
         }
         style={{ border: "1px solid blue", padding: "5px" }}
       >
