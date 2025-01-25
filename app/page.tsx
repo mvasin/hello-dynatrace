@@ -51,7 +51,10 @@ export default function Home() {
       >
         {isReqInFlight ? "fetching..." : "fetch random number*"}
       </button>
-      <br />
+      <div>
+        <sup>*</sup> fetches a random number from /api/sum which in turn fetches
+        2 random numbers in parallel from /api/random, sums them up and returns
+      </div>
       <button
         style={{ border: "1px solid red", padding: "5px" }}
         onClick={() => {
@@ -60,10 +63,6 @@ export default function Home() {
       >
         throw a frontend error
       </button>
-      <div>
-        <sup>*</sup> fetches a random number from /api/sum which in turn fetches
-        2 random numbers in parallel from /api/random, sums them up and returns
-      </div>
     </div>
   );
 }
