@@ -49,7 +49,7 @@ export default function Home() {
           throw new Error("An intentional error");
         }}
       >
-        throw an error
+        throw a frontend error
       </button>
       <div>
         <sup>*</sup> fetches a random number from /api/sum which in turn fetches
