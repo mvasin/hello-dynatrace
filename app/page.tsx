@@ -10,6 +10,7 @@ function isRealNumber(value: number | string): value is number {
 
 export default function Home() {
   const [count, setCount] = useState<number | string>(0);
+  const [isReqInFlight, setIsReqInFlight] = useState<boolean>(false);
   return (
     <div>
       {/* <script
@@ -29,18 +30,26 @@ export default function Home() {
       </button>
       <br />
       <button
-        onClick={() =>
+        onClick={() => {
+          setIsReqInFlight(true)
           fetch("/api/sum")
             .then((res) => {
-              if (res.ok) return res.json();
-              throw new Error(`Network response at ${new Date()} was not ok`);
+              if (res.ok) return res.json()
+              throw new Error(`Network response at ${new Date()} was not ok`)
             })
-            .then((data) => setCount(data.sum))
-            .catch((error) => setCount(error.message))
+            .then((data) => {
+              setCount(data.sum)
+              setIsReqInFlight(false)
+            })
+            .catch((error) =>{
+              setCount(error.message)
+              setIsReqInFlight(false)
+            })
+          }
         }
         style={{ border: "1px solid blue", padding: "5px" }}
       >
-        random number<sup>*</sup>
+        {isReqInFlight ? "fetching..." : "fetch random number*"}
       </button>
       <br />
       <button
