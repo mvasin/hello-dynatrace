@@ -22,13 +22,13 @@ export default function Home() {
       <br />
       <button
         onClick={() =>
-          fetch("/api/random")
+          fetch("/api/sum")
             .then((res) => res.json())
-            .then((data) => setCount(data.randomNumber))
+            .then((data) => setCount(data.sum))
         }
         style={{ border: "1px solid blue", padding: "5px" }}
       >
-        set counter to a random number fetched from an API (0-999)
+       random number<sup>*</sup>
       </button>
       <br/>
       <button
@@ -39,6 +39,7 @@ export default function Home() {
       >
         throw an error
       </button>
+      <div><sup>*</sup> fetches a random number from /api/sum which in turn fetches 2 random numbers in parallel from /api/random, sums them up and returns</div>
     </div>
   );
 }
