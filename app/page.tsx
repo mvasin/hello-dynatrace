@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-function isRealNumber(value: any): value is number {
+function isRealNumber(value: number | string): value is number {
   return (
     typeof value === "number" && !Number.isNaN(value) && Number.isFinite(value)
   );
