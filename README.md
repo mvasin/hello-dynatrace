@@ -1,1 +1,1 @@
-Getting started with Dynatrace
+A sample app to try out tracing/logging/metrics
